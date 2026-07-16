@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="720" viewBox="0 0 1500 720">
+  <defs>
+    <style>
+      .bg { fill: #f8fafc; }
+      .box { fill: #fff; stroke: #334155; stroke-width: 2.5; rx: 16; }
+      .accent { fill: #0f766e; }
+      .title { fill: #0f172a; font: 700 30px Arial, sans-serif; }
+      .h { fill: #0f172a; font: 700 20px Arial, sans-serif; }
+      .t { fill: #475569; font: 16px Arial, sans-serif; }
+      .white { fill: #fff; font: 700 20px Arial, sans-serif; }
+      .arrow { stroke: #0f766e; stroke-width: 4; fill: none; marker-end: url(#arrow); }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#0f766e"/>
+    </marker>
+  </defs>
+  <rect class="bg" width="1500" height="720"/>
+  <text class="title" x="55" y="58">Reproducible local analytics architecture</text>
+
+  <g transform="translate(55 120)">
+    <rect class="box" width="300" height="190"/>
+    <rect class="accent" width="300" height="52" rx="16"/>
+    <text class="white" x="22" y="34">Developer / reviewer</text>
+    <text class="t" x="22" y="88">make setup</text>
+    <text class="t" x="22" y="118">make test</text>
+    <text class="t" x="22" y="148">make demo</text>
+    <text class="t" x="22" y="178">backup / restore</text>
+  </g>
+
+  <path class="arrow" d="M355 215 H460"/>
+
+  <g transform="translate(465 105)">
+    <rect class="box" width="360" height="220"/>
+    <rect class="accent" width="360" height="52" rx="16"/>
+    <text class="white" x="22" y="34">Docker Compose</text>
+    <text class="h" x="22" y="92">PostgreSQL 16</text>
+    <text class="t" x="22" y="126">persistent named volume</text>
+    <text class="t" x="22" y="158">health-checked container</text>
+    <text class="t" x="22" y="190">SQL directory mounted into container</text>
+  </g>
+
+  <path class="arrow" d="M825 215 H930"/>
+
+  <g transform="translate(935 95)">
+    <rect class="box" width="510" height="240"/>
+    <rect class="accent" width="510" height="52" rx="16"/>
+    <text class="white" x="22" y="34">Relational data layer</text>
+    <text class="t" x="22" y="92">8 normalized tables · PK/FK/CHECK/UQ</text>
+    <text class="t" x="22" y="126">20,000 deterministic synthetic shipments</text>
+    <text class="t" x="22" y="160">append-only lifecycle and sensor history</text>
+    <text class="t" x="22" y="194">4 workload indexes · 3 reporting views</text>
+    <text class="t" x="22" y="228">numbered forward migration example</text>
+  </g>
+
+  <path class="arrow" d="M1190 335 V420"/>
+
+  <g transform="translate(935 425)">
+    <rect class="box" width="510" height="220"/>
+    <rect class="accent" width="510" height="52" rx="16"/>
+    <text class="white" x="22" y="34">Analytics and controls</text>
+    <text class="t" x="22" y="92">15 structural data-quality assertions</text>
+    <text class="t" x="22" y="126">12 operational and finance queries</text>
+    <text class="t" x="22" y="160">EXPLAIN (ANALYZE, BUFFERS) evidence</text>
+    <text class="t" x="22" y="194">BI-ready views and documented outputs</text>
+  </g>
+
+  <path class="arrow" d="M935 535 H825"/>
+
+  <g transform="translate(465 425)">
+    <rect class="box" width="360" height="220"/>
+    <rect class="accent" width="360" height="52" rx="16"/>
+    <text class="white" x="22" y="34">Portfolio artifacts</text>
+    <text class="t" x="22" y="92">README and data dictionary</text>
+    <text class="t" x="22" y="126">ERD and architecture diagram</text>
+    <text class="t" x="22" y="160">quality and query samples</text>
+    <text class="t" x="22" y="194">performance before / after</text>
+  </g>
+
+  <text class="t" x="55" y="690">All generated business data is deterministic and synthetic; no external company data is used.</text>
+</svg>

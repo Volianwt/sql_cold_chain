@@ -1,0 +1,33 @@
+Cold-Chain Freight Operations Database
+Verified structural and operational summary
+Reporting anchor: 2026-07-16
+
+STRUCTURAL CHECKS
+15 of 15 PASS; every issue_count = 0.
+
+- Broken shipment foreign-key relationships: 0
+- Cancelled shipments contain pickup/delivery activity: 0
+- Delivered shipments missing invoices: 0
+- Delivered timestamp and DELIVERED event disagree: 0
+- Dry-goods shipments contain temperature readings: 0
+- Duplicate sensor readings: 0
+- Duplicate shipment reference numbers: 0
+- Invalid scheduled or actual timelines: 0
+- Invoice amount differs from shipment revenue: 0
+- Invoices attached to undelivered shipments: 0
+- Missing required shipment values: 0
+- Origin and destination are identical: 0
+- Payment status and paid timestamp disagree: 0
+- Shipments missing all status history: 0
+- Temperature-controlled trips missing readings: 0
+
+INTENTIONAL OPERATIONAL EXCEPTIONS
+- Outstanding invoices: 5,709 REVIEW
+- Overdue invoices: 5,611 REVIEW
+- Late completed deliveries: 4,202 REVIEW
+- Shipments with at least one temperature excursion: 2,375 REVIEW
+- Temperature excursion readings (>3 C from target): 2,375 REVIEW
+- Currently unassigned, non-cancelled shipments: 39 REVIEW
+
+Command: make test
+Result: PASS

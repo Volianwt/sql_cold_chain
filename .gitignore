@@ -1,0 +1,9 @@
+.env
+.DS_Store
+*.log
+.vscode/
+backups/
+*.dump
+*.backup
+results/raw/
+CODEX_PROJECT_HANDOFF_CN.md

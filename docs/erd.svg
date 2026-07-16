@@ -1,0 +1,159 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1120" viewBox="0 0 1600 1120">
+  <defs>
+    <style>
+      .bg { fill: #f7fafc; }
+      .box { fill: #ffffff; stroke: #334155; stroke-width: 2; rx: 12; }
+      .head { fill: #0f766e; }
+      .title { fill: #ffffff; font: 700 21px Arial, sans-serif; }
+      .col { fill: #1e293b; font: 15px Menlo, monospace; }
+      .key { fill: #b45309; font: 700 15px Menlo, monospace; }
+      .rel { fill: none; stroke: #475569; stroke-width: 2.5; }
+      .card { fill: #0f172a; font: 700 15px Arial, sans-serif; }
+      .label { fill: #475569; font: 14px Arial, sans-serif; }
+      .page-title { fill: #0f172a; font: 700 30px Arial, sans-serif; }
+      .subtitle { fill: #64748b; font: 16px Arial, sans-serif; }
+    </style>
+  </defs>
+  <rect class="bg" width="1600" height="1120"/>
+  <text class="page-title" x="50" y="48">Cold-Chain Freight Operations Database — ERD</text>
+  <text class="subtitle" x="50" y="76">PostgreSQL 16 · PK/FK relationships · append-only lifecycle history</text>
+
+  <!-- Relationships are drawn first so table cards remain readable. -->
+  <path class="rel" d="M400 205 H500 V338 H610"/>
+  <text class="card" x="408" y="198">1</text><text class="card" x="590" y="331">N</text>
+  <text class="label" x="455" y="194">customer</text>
+
+  <path class="rel" d="M400 472 H505 V390 H610"/>
+  <text class="card" x="408" y="465">1</text><text class="card" x="560" y="383">0..N</text>
+  <text class="label" x="450" y="461">driver</text>
+
+  <path class="rel" d="M400 742 H520 V442 H610"/>
+  <text class="card" x="408" y="735">1</text><text class="card" x="560" y="435">0..N</text>
+  <text class="label" x="448" y="731">vehicle</text>
+
+  <path class="rel" d="M1230 206 H1080 V494 H990"/>
+  <path class="rel" d="M1230 245 H1105 V530 H990"/>
+  <text class="card" x="1208" y="199">1</text><text class="card" x="992" y="487">N</text>
+  <text class="card" x="1208" y="238">1</text><text class="card" x="992" y="523">N</text>
+  <text class="label" x="1090" y="193">origin</text><text class="label" x="1115" y="232">destination</text>
+
+  <path class="rel" d="M990 620 H1070 V470 H1230"/>
+  <text class="card" x="997" y="613">1</text><text class="card" x="1208" y="463">N</text>
+  <text class="label" x="1080" y="457">status events</text>
+
+  <path class="rel" d="M990 674 H1095 V735 H1230"/>
+  <text class="card" x="997" y="667">1</text><text class="card" x="1208" y="728">N</text>
+  <text class="label" x="1098" y="719">sensor readings</text>
+
+  <path class="rel" d="M990 728 H1075 V963 H1230"/>
+  <text class="card" x="997" y="721">1</text><text class="card" x="1193" y="956">0..1</text>
+  <text class="label" x="1085" y="947">invoice</text>
+
+  <!-- Left dimension tables -->
+  <g transform="translate(50 120)">
+    <rect class="box" width="350" height="190"/>
+    <path class="head" d="M12 0 H338 Q350 0 350 12 V48 H0 V12 Q0 0 12 0"/>
+    <text class="title" x="18" y="32">customers</text>
+    <text class="key" x="18" y="76">PK customer_id</text>
+    <text class="col" x="18" y="102">customer_name</text>
+    <text class="col" x="18" y="128">customer_type</text>
+    <text class="col" x="18" y="154">email (UQ), phone</text>
+    <text class="col" x="18" y="180">active, created_at</text>
+  </g>
+
+  <g transform="translate(50 380)">
+    <rect class="box" width="350" height="190"/>
+    <path class="head" d="M12 0 H338 Q350 0 350 12 V48 H0 V12 Q0 0 12 0"/>
+    <text class="title" x="18" y="32">drivers</text>
+    <text class="key" x="18" y="76">PK driver_id</text>
+    <text class="col" x="18" y="102">first_name, last_name</text>
+    <text class="col" x="18" y="128">license_number (UQ)</text>
+    <text class="col" x="18" y="154">hire_date, active</text>
+    <text class="col" x="18" y="180">created_at</text>
+  </g>
+
+  <g transform="translate(50 650)">
+    <rect class="box" width="350" height="190"/>
+    <path class="head" d="M12 0 H338 Q350 0 350 12 V48 H0 V12 Q0 0 12 0"/>
+    <text class="title" x="18" y="32">vehicles</text>
+    <text class="key" x="18" y="76">PK vehicle_id</text>
+    <text class="col" x="18" y="102">unit_number (UQ)</text>
+    <text class="col" x="18" y="128">vehicle_type, model_year</text>
+    <text class="col" x="18" y="154">refrigerated, active</text>
+    <text class="col" x="18" y="180">created_at</text>
+  </g>
+
+  <!-- Central fact table -->
+  <g transform="translate(610 125)">
+    <rect class="box" width="380" height="690"/>
+    <path class="head" d="M12 0 H368 Q380 0 380 12 V52 H0 V12 Q0 0 12 0"/>
+    <text class="title" x="18" y="34">shipments</text>
+    <text class="key" x="18" y="82">PK shipment_id</text>
+    <text class="col" x="18" y="112">reference_number (UQ)</text>
+    <text class="key" x="18" y="142">FK customer_id</text>
+    <text class="key" x="18" y="172">FK driver_id (nullable)</text>
+    <text class="key" x="18" y="202">FK vehicle_id (nullable)</text>
+    <text class="key" x="18" y="232">FK origin_location_id</text>
+    <text class="key" x="18" y="262">FK destination_location_id</text>
+    <text class="col" x="18" y="302">scheduled_pickup_at</text>
+    <text class="col" x="18" y="332">actual_pickup_at</text>
+    <text class="col" x="18" y="362">scheduled_delivery_at</text>
+    <text class="col" x="18" y="392">actual_delivery_at</text>
+    <text class="col" x="18" y="432">cargo_type, weight_kg</text>
+    <text class="col" x="18" y="462">agreed_revenue</text>
+    <text class="col" x="18" y="492">estimated_cost</text>
+    <text class="col" x="18" y="522">required_temperature_c</text>
+    <text class="col" x="18" y="552">source_system (migration 001)</text>
+    <text class="col" x="18" y="582">created_at</text>
+    <line x1="18" y1="608" x2="362" y2="608" stroke="#cbd5e1"/>
+    <text class="label" x="18" y="636">CHECK: origin ≠ destination</text>
+    <text class="label" x="18" y="662">CHECK: valid scheduled/actual timelines</text>
+  </g>
+
+  <!-- Right tables -->
+  <g transform="translate(1230 115)">
+    <rect class="box" width="320" height="210"/>
+    <path class="head" d="M12 0 H308 Q320 0 320 12 V48 H0 V12 Q0 0 12 0"/>
+    <text class="title" x="18" y="32">locations</text>
+    <text class="key" x="18" y="76">PK location_id</text>
+    <text class="col" x="18" y="102">facility_name, address_line</text>
+    <text class="col" x="18" y="128">city, province_state</text>
+    <text class="col" x="18" y="154">country, postal_code</text>
+    <text class="col" x="18" y="180">address tuple (UQ)</text>
+    <text class="col" x="18" y="206">created_at</text>
+  </g>
+
+  <g transform="translate(1230 375)">
+    <rect class="box" width="320" height="205"/>
+    <path class="head" d="M12 0 H308 Q320 0 320 12 V48 H0 V12 Q0 0 12 0"/>
+    <text class="title" x="18" y="32">shipment_status_history</text>
+    <text class="key" x="18" y="76">PK status_id</text>
+    <text class="key" x="18" y="102">FK shipment_id</text>
+    <text class="col" x="18" y="128">status, status_time</text>
+    <text class="col" x="18" y="154">notes, created_at</text>
+    <text class="col" x="18" y="180">shipment/status/time (UQ)</text>
+  </g>
+
+  <g transform="translate(1230 640)">
+    <rect class="box" width="320" height="190"/>
+    <path class="head" d="M12 0 H308 Q320 0 320 12 V48 H0 V12 Q0 0 12 0"/>
+    <text class="title" x="18" y="32">temperature_readings</text>
+    <text class="key" x="18" y="76">PK reading_id</text>
+    <text class="key" x="18" y="102">FK shipment_id</text>
+    <text class="col" x="18" y="128">recorded_at, temperature_c</text>
+    <text class="col" x="18" y="154">sensor_id, created_at</text>
+    <text class="col" x="18" y="180">shipment/sensor/time (UQ)</text>
+  </g>
+
+  <g transform="translate(1230 875)">
+    <rect class="box" width="320" height="220"/>
+    <path class="head" d="M12 0 H308 Q320 0 320 12 V48 H0 V12 Q0 0 12 0"/>
+    <text class="title" x="18" y="32">invoices</text>
+    <text class="key" x="18" y="76">PK invoice_id</text>
+    <text class="key" x="18" y="102">FK shipment_id (UQ)</text>
+    <text class="col" x="18" y="128">invoice_number (UQ)</text>
+    <text class="col" x="18" y="154">invoice_date, due_date</text>
+    <text class="col" x="18" y="180">amount, payment_status</text>
+    <text class="col" x="18" y="206">paid_at, created_at</text>
+  </g>
+</svg>
